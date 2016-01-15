@@ -104,4 +104,47 @@ public class Server {
 		return Response.ok(result, MediaType.APPLICATION_JSON).build();
 	}
 
+	@POST
+	@Path("/rating")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response rating(InputStream incomingData) throws JSONException {
+		StringBuilder builder = new StringBuilder();
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					incomingData));
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				builder.append(line);
+			}
+			String data = builder.toString();
+			JSONObject jsonObj = new JSONObject(data);
+			String secureToken = jsonObj.getString("secureToken");
+			String rating = jsonObj.getString("rating");
+			String movieId = jsonObj.getString("movieId");
+			boolean complete = new MovieFacade().rating(1,
+					Integer.parseInt(rating), Integer.parseInt(movieId));
+			JSONObject responseObj = new JSONObject();
+			if (complete) {
+				responseObj.put("complete", "true");
+
+				return Response.status(200).entity(responseObj.toString())
+						.build();
+			}
+		} catch (Exception e) {
+			System.out.println("Error Parsing: - ");
+			return Response
+					.status(200)
+					.entity(new JSONObject().put("complete", "false")
+							.toString()).build();
+		}
+
+		// System.out.println("Data Received: " + crunchifyBuilder.toString());
+
+		// return HTTP response 200 in case of success
+		return Response.status(200)
+				.entity(new JSONObject().put("complete", "false").toString())
+				.build();
+	}
+
 }

@@ -135,6 +135,31 @@ public class MovieFacade {
 		return movieTitles;
 	}
 
+	public boolean rating(int userId, int rating, int movieId) {
+		Connection connection = null;
+		ArrayList<String> movieTitles = new ArrayList<String>();
+		try {
+			connection = manager.getDBConnection();
+
+			String sql = "insert into ratings values(? , ? , ?);";
+
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, userId);
+			stmt.setInt(2, movieId);
+			stmt.setInt(3, rating);
+
+			stmt.executeUpdate();
+
+			stmt.close();
+			connection.close();
+		} catch (Exception ex) {
+			Logger.getLogger(MySqlConnectionManager.class.getName()).log(
+					Level.SEVERE, null, ex);
+			return false;
+		}
+		return true;
+	}
+
 	/*
 	 * public static void main(String arg[]) throws IOException {
 	 * System.out.println("start"); ArrayList<String> movieIDs = new
