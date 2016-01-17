@@ -44,11 +44,13 @@ public class ServiceClient {
 		// ArrayList<movie> movies = new ArrayList<movie>();
 		try {
 			for (String title : movieTitles) {
+				String realTitle = title.split("//--//")[0];
+				String id = title.split("//--//")[1];
 				String url = "http://www.omdbapi.com/?t="
-						+ URLEncoder.encode(title, "UTF-8");
+						+ URLEncoder.encode(realTitle, "UTF-8");
 				// movie movie = client(url);
 				// movies.add(movie);
-				MultiThread thread = new MultiThread(url);
+				MultiThread thread = new MultiThread(url, id);
 				thread.start();
 				thread.join();
 			}
@@ -128,10 +130,12 @@ public class ServiceClient {
 	public class MultiThread extends Thread {
 
 		private String url = null;
+		private String id = null;
 
-		public MultiThread(String url) {
+		public MultiThread(String url, String id) {
 			super("MultiServerThread");
 			this.url = url;
+			this.id = id;
 		}
 
 		@Override
@@ -184,6 +188,7 @@ public class ServiceClient {
 		private movie map(JSONObject jsonObj) {
 			movie movie = new movie();
 			try {
+				movie.setId(id);
 				movie.setTitle(jsonObj.getString("Title"));
 				movie.setPoster(jsonObj.getString("Poster"));
 				movie.setActor(jsonObj.getString("Actors"));

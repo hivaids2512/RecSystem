@@ -2,76 +2,85 @@ package hcmiu.edu.vn.recsystem.entity;
 
 public class movie {
 
-    private String Title;
-    private String Year;
-    private String Genre;
-    private String Director;
-    private String Actor;
-    private String Plot;
-    private String Poster;
-    private String IMDBRating;
+	private String Id;
+	private String Title;
+	private String Year;
+	private String Genre;
+	private String Director;
+	private String Actor;
+	private String Plot;
+	private String Poster;
+	private String IMDBRating;
 
-    public String getTitle() {
-        return Title;
-    }
+	public String getId() {
+		return Id;
+	}
 
-    public void setTitle(String title) {
-        Title = title;
-    }
+	public void setId(String id) {
+		Id = id;
+	}
 
-    public String getYear() {
-        return Year;
-    }
+	public String getTitle() {
+		return Title;
+	}
 
-    public void setYear(String year) {
-        Year = year;
-    }
+	public void setTitle(String title) {
+		Title = title;
+	}
 
-    public String getGenre() {
-        return Genre;
-    }
+	public String getYear() {
+		return Year;
+	}
 
-    public void setGenre(String genre) {
-        Genre = genre;
-    }
+	public void setYear(String year) {
+		Year = year;
+	}
 
-    public String getDirector() {
-        return Director;
-    }
+	public String getGenre() {
+		return Genre;
+	}
 
-    public void setDirector(String director) {
-        Director = director;
-    }
+	public void setGenre(String genre) {
+		Genre = genre;
+	}
 
-    public String getActor() {
-        return Actor;
-    }
+	public String getDirector() {
+		return Director;
+	}
 
-    public void setActor(String actor) {
-        Actor = actor;
-    }
+	public void setDirector(String director) {
+		Director = director;
+	}
 
-    public String getPlot() {
-        return Plot;
-    }
+	public String getActor() {
+		return Actor;
+	}
 
-    public void setPlot(String plot) {
-        Plot = plot;
-    }
+	public void setActor(String actor) {
+		Actor = actor;
+	}
 
-    public String getPoster() {
-        return Poster;
-    }
+	public String getPlot() {
+		return Plot;
+	}
 
-    public void setPoster(String poster) {
-        Poster = poster;
-    }
+	public void setPlot(String plot) {
+		Plot = plot;
+	}
 
-    public String getIMDBRating() {
-        return IMDBRating;
-    }
+	public String getPoster() {
+		return Poster;
+	}
 
-    public void setIMDBRating(String IMDBRating) {
-        this.IMDBRating = IMDBRating;
-    }
+	public void setPoster(String poster) {
+		Poster = poster;
+	}
+
+	public String getIMDBRating() {
+		return IMDBRating;
+	}
+
+	public void setIMDBRating(String IMDBRating) {
+		this.IMDBRating = IMDBRating;
+	}
 }

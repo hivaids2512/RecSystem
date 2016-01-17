@@ -122,15 +122,19 @@ public class Server {
 			String secureToken = jsonObj.getString("secureToken");
 			String rating = jsonObj.getString("rating");
 			String movieId = jsonObj.getString("movieId");
-			boolean complete = new MovieFacade().rating(1,
-					Integer.parseInt(rating), Integer.parseInt(movieId));
-			JSONObject responseObj = new JSONObject();
-			if (complete) {
-				responseObj.put("complete", "true");
-
-				return Response.status(200).entity(responseObj.toString())
-						.build();
-			}
+			System.out.println("yeah");
+			System.out.println(secureToken);
+			System.out.println(rating);
+			System.out.println(movieId);
+			/*
+			 * boolean complete = new MovieFacade().rating(1,
+			 * Integer.parseInt(rating), Integer.parseInt(movieId)); JSONObject
+			 * responseObj = new JSONObject(); if (complete) {
+			 * responseObj.put("complete", "true");
+			 * 
+			 * return Response.status(200).entity(responseObj.toString())
+			 * .build(); }
+			 */
 		} catch (Exception e) {
 			System.out.println("Error Parsing: - ");
 			return Response

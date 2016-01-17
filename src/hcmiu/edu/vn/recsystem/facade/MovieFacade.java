@@ -35,6 +35,7 @@ public class MovieFacade {
 			while (result.next()) {
 				String titleReal = "";
 				String title = result.getString("Title");
+				int movieId = result.getInt("MovieID");
 				String parts[] = title.split(" ");
 				for (int i = 0; i < parts.length - 1; i++) {
 					if (parts[i].startsWith("(")) {
@@ -45,7 +46,7 @@ public class MovieFacade {
 					}
 					titleReal = titleReal + " " + parts[i];
 				}
-				movieTitles.add(titleReal);
+				movieTitles.add(titleReal + "//--//" + movieId);
 			}
 			stmt.close();
 			connection.close();
@@ -116,7 +117,7 @@ public class MovieFacade {
 						}
 						titleReal = titleReal + " " + parts[i];
 					}
-					movieTitles.add(titleReal);
+					movieTitles.add(titleReal + "//--//" + id);
 				}
 				stmt.close();
 
