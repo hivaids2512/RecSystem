@@ -8,11 +8,13 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class DataModel {
 
-	private static MysqlDataSource dataSource;
-	private static MySQLJDBCDataModel datamodel;
-	public static ReloadFromJDBCDataModel dm;
+	private static DataModel instance = null;
+	private static Object mutex = new Object();
+	private MysqlDataSource dataSource;
+	private MySQLJDBCDataModel datamodel;
+	private ReloadFromJDBCDataModel dm;
 
-	public static void init() {
+	private DataModel() {
 		dataSource = new MysqlDataSource();
 		dataSource.setServerName("localhost");
 		dataSource.setUser("root");
@@ -26,6 +28,20 @@ public class DataModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
+	protected ReloadFromJDBCDataModel getDataModel() {
+		return dm;
+	}
+
+	public static DataModel getInstance() {
+		if (instance == null) {
+			synchronized (mutex) {
+				if (instance == null)
+					instance = new DataModel();
+			}
+		}
+		return instance;
+	}
 }

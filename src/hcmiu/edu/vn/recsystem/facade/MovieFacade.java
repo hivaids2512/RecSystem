@@ -20,6 +20,7 @@ public class MovieFacade {
 		manager = new MySqlConnectionManager();
 	}
 
+	// This method is used to get random movies
 	public ArrayList<String> getRandommovies(int size) {
 		Connection connection = null;
 		ArrayList<String> movieTitles = new ArrayList<String>();
@@ -58,6 +59,7 @@ public class MovieFacade {
 		return movieTitles;
 	}
 
+	// This method is used to get list of movie id that user has been rated
 	public ArrayList<Integer> getRatedMovies(String userToken) {
 		Connection connection = null;
 		ArrayList<Integer> movieIDs = new ArrayList<Integer>();
@@ -84,6 +86,8 @@ public class MovieFacade {
 		return movieIDs;
 	}
 
+	// For each movie id that user has been rated, this method will calculate
+	// the most similarity for that movies
 	public ArrayList<String> getRecommeded(String Token, int numOfRec)
 			throws IOException {
 		Connection connection = null;
@@ -136,9 +140,9 @@ public class MovieFacade {
 		return movieTitles;
 	}
 
+	// This method is used for add rating a movie
 	public boolean rating(int userId, int rating, int movieId) {
 		Connection connection = null;
-		ArrayList<String> movieTitles = new ArrayList<String>();
 		try {
 			connection = manager.getDBConnection();
 
@@ -161,12 +165,4 @@ public class MovieFacade {
 		}
 		return true;
 	}
-
-	/*
-	 * public static void main(String arg[]) throws IOException {
-	 * System.out.println("start"); ArrayList<String> movieIDs = new
-	 * MovieFacade() .getRecommeded("2345678976543"); System.out.println("asd");
-	 * for (String id : movieIDs) { System.out.println(id); } }
-	 */
-
 }

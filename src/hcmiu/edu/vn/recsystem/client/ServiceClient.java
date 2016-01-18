@@ -23,23 +23,6 @@ public class ServiceClient {
 	private static final String webServiceURI = "http://www.omdbapi.com";
 	public ArrayList<movie> movies = new ArrayList<movie>();
 
-	private movie map(JSONObject jsonObj) {
-		movie movie = new movie();
-		try {
-			movie.setTitle(jsonObj.getString("Title"));
-			movie.setPoster(jsonObj.getString("Poster"));
-			movie.setActor(jsonObj.getString("Actors"));
-			movie.setDirector(jsonObj.getString("Director"));
-			movie.setGenre(jsonObj.getString("Genre"));
-			movie.setIMDBRating(jsonObj.getString("imdbRating"));
-			movie.setPlot(jsonObj.getString("Plot"));
-			movie.setYear(jsonObj.getString("Year"));
-		} catch (JSONException e) {
-			return null;
-		}
-		return movie;
-	}
-
 	public ArrayList<movie> getmovies(ArrayList<String> movieTitles) {
 		// ArrayList<movie> movies = new ArrayList<movie>();
 		try {
@@ -111,21 +94,6 @@ public class ServiceClient {
 	 * 
 	 * }
 	 */
-
-	public void go() {
-		ArrayList<String> movieTitles = new ArrayList<String>();
-		movieTitles.add("life of pi");
-		movieTitles.add("the social network");
-		movieTitles.add("the walking dead");
-		movieTitles.add("the avenger");
-
-		ArrayList<movie> movies = getmovies(movieTitles);
-
-		for (movie movie : movies) {
-			System.out.println(movie.getTitle());
-		}
-
-	}
 
 	public class MultiThread extends Thread {
 
