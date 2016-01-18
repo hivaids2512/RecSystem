@@ -154,6 +154,7 @@ public class MovieFacade {
 			stmt.close();
 			connection.close();
 		} catch (Exception ex) {
+			System.out.println(ex);
 			Logger.getLogger(MySqlConnectionManager.class.getName()).log(
 					Level.SEVERE, null, ex);
 			return false;

@@ -7,14 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
-import org.apache.mahout.cf.taste.impl.model.jdbc.ReloadFromJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
-
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class ItemRecommender {
 
@@ -22,21 +18,22 @@ public class ItemRecommender {
 			int numberOfRec) throws IOException {
 		ArrayList<Integer> recList = new ArrayList<Integer>();
 		try {
-
-			MysqlDataSource dataSource = new MysqlDataSource();
-			dataSource.setServerName("localhost");
-			dataSource.setUser("root");
-			dataSource.setPassword("");
-			dataSource.setDatabaseName("recommender");
-			MySQLJDBCDataModel datamodel = new MySQLJDBCDataModel(dataSource,
-					"ratings", "UserId", "MovieId", "Rating", null);
-			ReloadFromJDBCDataModel dm = new ReloadFromJDBCDataModel(datamodel);
+			DataModel.init();
+			/*
+			 * MysqlDataSource dataSource = new MysqlDataSource();
+			 * dataSource.setServerName("localhost");
+			 * dataSource.setUser("root"); dataSource.setPassword("");
+			 * dataSource.setDatabaseName("recommender"); MySQLJDBCDataModel
+			 * datamodel = new MySQLJDBCDataModel(dataSource, "ratings",
+			 * "UserId", "MovieId", "Rating", null); ReloadFromJDBCDataModel dm
+			 * = new ReloadFromJDBCDataModel(datamodel);
+			 */
 			// DataModel dm = new FileDataModel(new File("data/rate.csv"));
 
-			ItemSimilarity sim = new LogLikelihoodSimilarity(dm);
+			ItemSimilarity sim = new LogLikelihoodSimilarity(DataModel.dm);
 
 			GenericItemBasedRecommender recommender = new GenericItemBasedRecommender(
-					dm, sim);
+					DataModel.dm, sim);
 			// int x=1;
 			// for (LongPrimitiveIterator items = dm.getItemIDs();
 			// items.hasNext();){
