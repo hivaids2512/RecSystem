@@ -8,6 +8,7 @@ import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.jdbc.ReloadFromJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
+import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 
@@ -26,15 +27,18 @@ public class ItemRecommender {
 			 * "UserId", "MovieId", "Rating", null); ReloadFromJDBCDataModel dm
 			 * = new ReloadFromJDBCDataModel(datamodel);
 			 */
-
-			DataModel model = DataModel.getInstance();
+			model model = null;
+			model = model.getInstance();
 			ReloadFromJDBCDataModel dm = model.getDataModel();
+			dm.refresh(null);
+
+			DataModel dmm = dm.getDelegateInMemory();
 			// DataModel dm = new FileDataModel(new File("data/rate.csv"));
 
-			ItemSimilarity sim = new LogLikelihoodSimilarity(dm);
+			ItemSimilarity sim = new LogLikelihoodSimilarity(dmm);
 
 			GenericItemBasedRecommender recommender = new GenericItemBasedRecommender(
-					dm, sim);
+					dmm, sim);
 
 			for (int id : movieIDs) {
 				List<RecommendedItem> recommendations = recommender

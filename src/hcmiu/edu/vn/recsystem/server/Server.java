@@ -1,6 +1,6 @@
 package hcmiu.edu.vn.recsystem.server;
 
-import hcmiu.edu.vn.recsystem.client.ServiceClient;
+import hcmiu.edu.vn.recsystem.entity.movie;
 import hcmiu.edu.vn.recsystem.facade.MovieFacade;
 import hcmiu.edu.vn.recsystem.facade.UserFacade;
 
@@ -73,14 +73,8 @@ public class Server {
 	@Path("/getmovies")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response verifyRESTService(InputStream incomingData) {
-		ArrayList<String> movieTitles = new MovieFacade().getRandommovies(25);
-		// movieTitles.add("life of pi");
-		// movieTitles.add("the social network");
-		// movieTitles.add("the walking dead");
-		// movieTitles.add("the avenger");
-		// movieTitles.add("toy story");
-		String result = new Gson().toJson(new ServiceClient()
-				.getmovies(movieTitles));
+		ArrayList<movie> movies = new MovieFacade().getRandommovies(25);
+		String result = new Gson().toJson(movies);
 
 		// return HTTP response 200 in case of success
 		return Response.ok(result, MediaType.APPLICATION_JSON).build();
@@ -90,15 +84,14 @@ public class Server {
 	@Path("/getrec")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getrec(InputStream incomingData) throws IOException {
-		ArrayList<String> movieTitles = new MovieFacade().getRecommeded(
+		ArrayList<movie> movies = new MovieFacade().getRecommeded(
 				"2345678976543", 10);
 		// movieTitles.add("life of pi");
 		// movieTitles.add("the social network");
 		// movieTitles.add("the walking dead");
 		// movieTitles.add("the avenger");
 		// movieTitles.add("toy story");
-		String result = new Gson().toJson(new ServiceClient()
-				.getmovies(movieTitles));
+		String result = new Gson().toJson(movies);
 
 		// return HTTP response 200 in case of success
 		return Response.ok(result, MediaType.APPLICATION_JSON).build();
@@ -132,7 +125,6 @@ public class Server {
 			JSONObject responseObj = new JSONObject();
 			if (complete) {
 				responseObj.put("complete", "true");
-
 				return Response.status(200).entity(responseObj.toString())
 						.build();
 			}

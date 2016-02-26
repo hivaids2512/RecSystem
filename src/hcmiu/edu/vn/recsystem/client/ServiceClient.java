@@ -159,10 +159,10 @@ public class ServiceClient {
 				movie.setId(id);
 				movie.setTitle(jsonObj.getString("Title"));
 				movie.setPoster(jsonObj.getString("Poster"));
-				movie.setActor(jsonObj.getString("Actors"));
+				// movie.setActor(jsonObj.getString("Actors"));
 				movie.setDirector(jsonObj.getString("Director"));
 				movie.setGenre(jsonObj.getString("Genre"));
-				movie.setIMDBRating(jsonObj.getString("imdbRating"));
+				// movie.setIMDBRating(jsonObj.getString("imdbRating"));
 				movie.setPlot(jsonObj.getString("Plot"));
 				movie.setYear(jsonObj.getString("Year"));
 			} catch (JSONException e) {

@@ -21,26 +21,26 @@ public class evaluate {
 
 		try {
 			RandomUtils.useTestSeed();
-			DataModel model = new FileDataModel(new File("data/rating.csv"));
+			DataModel model = new FileDataModel(new File("data/rate.csv"));
 			RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
-			
-			RecommenderBuilder builder = new RecommenderBuilder(){
+
+			RecommenderBuilder builder = new RecommenderBuilder() {
 
 				@Override
 				public Recommender buildRecommender(DataModel model)
 						throws TasteException {
 					ItemSimilarity sim = new LogLikelihoodSimilarity(model);
-					
-					GenericItemBasedRecommender recommender = new GenericItemBasedRecommender(model, sim);
+
+					GenericItemBasedRecommender recommender = new GenericItemBasedRecommender(
+							model, sim);
 					return recommender;
 				}
-				
+
 			};
-			
+
 			double score = evaluator.evaluate(builder, null, model, 0.7, 1.0);
 			System.out.print(score);
-			
-				
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
