@@ -18,7 +18,7 @@ public class model {
 		dataSource = new MysqlDataSource();
 		dataSource.setServerName("localhost");
 		dataSource.setUser("root");
-		dataSource.setPassword("");
+		dataSource.setPassword("@Quy@%!@!((#");
 		dataSource.setDatabaseName("recommender");
 		dataSource.setCachePreparedStatements(true);
 		dataSource.setCachePrepStmts(true);

@@ -16,7 +16,7 @@ public class MySqlConnectionManager {
 	private String port = "3306";
 	private String database = "recommender";
 	private String userName = "root";
-	private String password = "";
+	private String password = "@Quy@%!@!((#";
 	private String connectionString;
 
 	public MySqlConnectionManager() {
